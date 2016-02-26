@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+    <p:outputPanel id="sumaryOutputPanel">
+        <p:panel id="sumaryPanel">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Project Name:"/>
+                <h:outputLabel value="#{createProjectBean.project.name}"/>
+                <h:outputLabel value="Project Description:"/>
+                <h:outputText escape="false" value="#{createProjectBean.project.description}"/>
+            </h:panelGrid>
+        </p:panel>
+        <h:panelGrid columns="3" columnClasses="alignTop, alignTop, alignTop">
+            <p:panel header="Configured Tools">
+                <p:dataList value="#{configureTools.configuredTools}" var="tool">
+                    <b>#{tool.name}</b> at <b>#{tool.server}</b>
+                </p:dataList>
+            </p:panel>
+
+            <p:spacer width="20"/>
+
+            <p:panel header="Members">
+                <p:dataList value="#{configureUsers.selectedUsers}"
+                            var="member">
+                    <b>#{member.name}</b> : #{member.login}
+                </p:dataList>
+
+            </p:panel>
+        </h:panelGrid>
+        
+    </p:outputPanel>
+</html>

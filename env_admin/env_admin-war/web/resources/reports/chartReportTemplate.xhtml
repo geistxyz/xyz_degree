@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <!--                <c:choose>
+                            <c:when test="#{reportsController.imageList.size() > 0}">
+                                <h:form>
+                                    <ui:repeat value="#{reportsController.imageList}" var="image">
+                                        <p:panel header="#{image.name}">
+                                            <p:graphicImage value="#{reportsController.imageList[1].image}"
+                                                            height="#{reportsController.height}"
+                                                            width="#{reportsController.width}">
+                                                <f:param name="image_id" value="#{image.id}"/>
+                                            </p:graphicImage>
+                                        </p:panel>
+                                    </ui:repeat>
+                                </h:form>
+                            </c:when>
+
+                            <c:otherwise>
+                                There are no Chart reports to display
+                            </c:otherwise>
+                        </c:choose>-->
+
+
+<!--        <p:panel header="#{reportsController.imageList[0].name}">
+    <p:graphicImage value="#{reportsController.imageList[0].image}"
+                    height="#{reportsController.height}"
+                    width="#{reportsController.width}">
+    </p:graphicImage>
+</p:panel>-->
+
+<!--        <ui:repeat value="#{reportsController.imageList}" var="image">
+            <p:panel header="#{image.name}">
+                <p:graphicImage value="#{reportsController.imageList[3].image}"
+                                height="#{reportsController.height}"
+                                width="#{reportsController.width}">
+                </p:graphicImage>
+            </p:panel>
+        </ui:repeat>-->
+
+
+<!--        <ui:repeat value="#{reportsController.imageList}" var="image">
+            <h:commandButton action="#{reportsController.setImageIdToDisplay(image.id) }" value="#{image.name}" onclick="reportDlg.show();"/>
+            <p:commandButton value="#{image.name}" onclick="reportDlg.show();" type="button" >
+                <f:param name="image_id" value="#{image.id}"/>
+            </p:commandButton>
+        </ui:repeat>
+
+        <p:dialog header="#{reportsController.image.name}" widgetVar="reportDlg" showEffect="explode" hideEffect="explode" appendToBody="true" width="800">
+            <p:graphicImage value="#{reportsController.image}"
+                            height="#{reportsController.height}"
+                            width="#{reportsController.width}">
+            </p:graphicImage>
+        </p:dialog>-->
+
+
+
+
+
+
+
+
+        <c:choose>
+            <c:when test="#{reportsController.imageList.size() > 0}">
+                <p:commandButton value="#{reportsController.imageList[0].name}" onclick="dlg0.show();" type="button" rendered="#{not empty reportsController.imageList[0].name}"/>
+                <p:commandButton value="#{reportsController.imageList[1].name}" onclick="dlg1.show();" type="button" rendered="#{not empty reportsController.imageList[1].name}"/>
+                <p:commandButton value="#{reportsController.imageList[2].name}" onclick="dlg2.show();" type="button" rendered="#{not empty reportsController.imageList[2].name}"/>
+                <p:commandButton value="#{reportsController.imageList[3].name}" onclick="dlg3.show();" type="button" rendered="#{not empty reportsController.imageList[3].name}"/>
+                <p:commandButton value="#{reportsController.imageList[4].name}" onclick="dlg4.show();" type="button" rendered="#{not empty reportsController.imageList[4].name}"/>
+
+                <p:dialog header="#{reportsController.imageList[0].name}" widgetVar="dlg0" showEffect="explode" hideEffect="explode" appendToBody="true" width="850">
+                    <p:graphicImage value="#{reportsController.imageList[0].image}"
+                                    height="#{reportsController.height}"
+                                    width="#{reportsController.width}">
+                    </p:graphicImage>
+                </p:dialog>
+                <p:dialog header="#{reportsController.imageList[1].name}" widgetVar="dlg1" showEffect="explode" hideEffect="explode" appendToBody="true" width="850">
+                    <p:graphicImage value="#{reportsController.imageList[1].image}"
+                                    height="#{reportsController.height}"
+                                    width="#{reportsController.width}">
+                    </p:graphicImage>
+                </p:dialog>
+                <p:dialog header="#{reportsController.imageList[2].name}" widgetVar="dlg2" showEffect="explode" hideEffect="explode" appendToBody="true" width="850">
+                    <p:graphicImage value="#{reportsController.imageList[2].image}"
+                                    height="#{reportsController.height}"
+                                    width="#{reportsController.width}">
+                    </p:graphicImage>
+                </p:dialog>
+                <p:dialog header="#{reportsController.imageList[3].name}" widgetVar="dlg3" showEffect="explode" hideEffect="explode" appendToBody="true" width="850">
+                    <p:graphicImage value="#{reportsController.imageList[3].image}"
+                                    height="#{reportsController.height}"
+                                    width="#{reportsController.width}">
+                    </p:graphicImage>
+                </p:dialog>
+                <p:dialog header="#{reportsController.imageList[4].name}" widgetVar="dlg4" showEffect="explode" hideEffect="explode" appendToBody="true" width="850">
+                    <p:graphicImage value="#{reportsController.imageList[4].image}"
+                                    height="#{reportsController.height}"
+                                    width="#{reportsController.width}">
+                    </p:graphicImage>
+                </p:dialog>
+            </c:when>
+            <c:otherwise>
+                There are no Chart reports to display
+            </c:otherwise>
+        </c:choose>
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--        <h:form id="reportsForm">
+                     Your Passengers Grid
+                    <p:dataGrid var="report" value="#{reportsController.imageList}" columns="1" id="reportsDataGrid">
+                        <p:column id="firstColum">
+
+
+                             Passenger Panel
+                            <p:panel id="report_#{report.id}"
+                                     header="#{report.name}" toggleable="true" collapsed="true"
+                                     styleClass="panel-style-title info-header">
+
+                                 Edit and Delete panel buttons
+                                <f:facet name="actions">
+                                    <p:commandLink id="displayReportLink"
+                                                   update="@this"
+                                                   action="#{reportsController.setImageIdToDisplay(report.id)}">
+                                        <h:outputText id="displayReportLinkLabel" value="Display report" />
+                                    </p:commandLink>
+                                </f:facet>
+
+                                <h:panelGroup id="reportPanelGroup">
+                                    <p:graphicImage value="#{report.image}"
+                                                    height="#{reportsController.height}"
+                                                    width="#{reportsController.width}">
+                                    </p:graphicImage>
+                                </h:panelGroup>
+                            </p:panel>
+                        </p:column>
+                    </p:dataGrid>
+                </h:form>-->
+
+
+
+
+
+
+        <!--        <c:choose>
+                    <c:when test="#{reportsController.imageList.size() > 0}">
+                        <h:form>
+                            <ui:param name="image0" value="#{reportsController.imageList[0]}"/>
+                            <ui:param name="image1" value="#{reportsController.imageList[1]}"/>
+                            <ui:param name="image2" value="#{reportsController.imageList[2]}"/>
+                            <ui:param name="image3" value="#{reportsController.imageList[3]}"/>
+                            <ui:param name="image4" value="#{reportsController.imageList[4]}"/>
+                            <ui:param name="height" value="#{reportsController.height}"/>
+                            <ui:param name="width" value="#{reportsController.width}"/>
+                            <p:panel header="#{image0.name}" rendered="#{not empty image0}">
+                                <p:graphicImage value="#{image0.image}"
+                                                height="#{height}"
+                                                width="#{width}">
+                                </p:graphicImage>
+                            </p:panel>
+                            <p:panel header="#{image1.name}" rendered="#{not empty image1}">
+                                <p:graphicImage value="#{image1.image}"
+                                                height="#{height}"
+                                                width="#{width}">
+                                </p:graphicImage>
+                            </p:panel>
+                            <p:panel header="#{image2.name}" rendered="#{not empty image2}">
+                                <p:graphicImage value="#{image2.image}"
+                                                height="#{height}"
+                                                width="#{width}">
+                                </p:graphicImage>
+                            </p:panel>
+                            <p:panel header="#{image3.name}" rendered="#{not empty image3}">
+                                <p:graphicImage value="#{image3.image}"
+                                                height="#{height}"
+                                                width="#{width}">
+                                </p:graphicImage>
+                            </p:panel>
+                            <p:panel header="#{image4.name}" rendered="#{not empty image4}">
+                                <p:graphicImage value="#{image4.image}"
+                                                height="#{height}"
+                                                width="#{width}">
+                                </p:graphicImage>
+                            </p:panel>
+                        </h:form>
+                    </c:when>
+
+                    <c:otherwise>
+                        There are no Chart reports to display
+                    </c:otherwise>
+                </c:choose>-->
+
+
+
+
+    </cc:implementation>
+</html>

@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <script type="text/javascript" language="JavaScript">
+    //<![CDATA[
+    function onTestConnectionEvent(evt) {
+        if(evt.status == 'success') {
+            testConnectionDialog.show();
+        }
+    }
+    function onSaveEvent(evt) {
+        if(evt.status == 'success') {
+            configureToolDialog.hide();
+        }
+    }
+    // ]]>
+    </script>
+    <p:dialog widgetVar="configureToolDialog" width="500" modal="true" 
+              id="configureToolDialog"
+              closeOnEscape="false"
+              header="Setting configuration for '#{configureToolBean.selectedTool.tool.name}' tool">
+        <h:form id="configureToolDialogForm" prependId="false">
+            <p:panel>
+                <h:panelGrid columns="3">
+
+                    <h:outputLabel for="rootUserInput" value="Root User (*):"/>
+                    <h:inputText id="rootUserInput" value="#{configureToolBean.selectedTool.userName}"
+                                 required="true" requiredMessage="User Name is required"/>
+                    <p:message for="rootUserInput"/>
+
+                    <h:outputLabel for="passwordInput" value="Password (*):"/>
+                    <h:inputText id="passwordInput" value="#{configureToolBean.selectedTool.password}"
+                                 required="true" requiredMessage="Password is required"/>
+                    <p:message for="passwordInput"/>
+
+                    <h:outputLabel for="serverURLInput" value="Server URL (*):"/>
+                    <h:inputText id="serverURLInput" value="#{configureToolBean.selectedTool.server}"
+                                 required="true" requiredMessage="Server address is required"/>
+                    <p:message for="serverURLInput"/>
+
+                    <p:spacer/>
+                    <h:commandButton id="testConnectionLink" value="Test Connection" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                        <f:ajax event="click" execute="@form"
+                                listener="#{test.testConnection}"
+                                render=":testConnectionDialog :growl"
+                                onevent="onTestConnectionEvent"
+                                >
+                        </f:ajax>
+                    </h:commandButton>
+                    <p:spacer/>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:spacer height="20"/>
+            <p:commandButton id="cancelButton"
+                             value="Cancel"
+                             style="float:left;vertical-align: bottom"
+                             type="reset"
+                             onclick="configureToolDialog.hide()"
+                             />
+
+
+            <h:commandButton id="saveButton"
+                             value="Save" style="float:right;vertical-align: bottom"
+                             styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <f:ajax event="click" execute="@form"
+                        listener="#{configureToolBean.save}"
+                        onevent="onSaveEvent"
+                        render=":growl"
+                        >
+                </f:ajax>
+            </h:commandButton>
+        </h:form>
+    </p:dialog>
+    <p:confirmDialog id="testConnectionDialog"
+              widgetVar="testConnectionDialog"
+              header="Test Connection Result"
+              modal="true"
+              closeOnEscape="true"
+              severity="warn"
+              message="#{test.testMessage}"
+              />
+</html>

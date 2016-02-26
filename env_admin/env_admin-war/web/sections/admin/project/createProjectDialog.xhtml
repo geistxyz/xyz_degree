@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <script type="text/javascript" language="JavaScript">
+    //<![CDATA[
+        function resetProjectWizard() {
+            createProjectWizard.loadStep(createProjectWizard.cfg.steps[0], true);
+            createProjectDialog.hide();
+        }
+    // ]]>
+    </script>
+    <p:dialog id="createProjectDialog" header="Create New Project"
+              width="1000"
+              widgetVar="createProjectDialog"
+              modal="true">
+        <p:panel style="border: 10px;">
+            <h:panelGrid columns="1">
+                <h:form id="createProjectForm">
+                    <p:tooltip global="true"/>
+                    <p:panel id="wizardPanel" style="margin: 10px">
+                        <p:wizard id="createProjectWizard"
+                                  widgetVar="createProjectWizard">
+                            <p:tab id="general" title="General Information">
+                                <ui:include src="/sections/admin/project/generalInformationPanel.xhtml"/>
+                            </p:tab>
+                            <p:tab id="chooseTools" title="Select Tools">
+                                <ui:include src="/sections/admin/project/selectToolsPanel.xhtml"/>
+                            </p:tab>
+                            <p:tab id="configTools" title="Configure Selected Tools"
+                                   rendered="#{not empty configureTools.selectedToolsList
+                                               or not empty configureTools.configuredTools}">
+                                <ui:include src="/sections/admin/project/configureToolsPanel.xhtml"/>
+                            </p:tab>
+                            <p:tab id="addMembers" title="Add Members">
+                                <ui:include src="/sections/admin/project/addMembersPanel.xhtml"/>
+                            </p:tab>
+                            <p:tab id="configToolAccounts" title="Configure Member Accounts"
+                                   rendered="#{not empty configureUsers.selectedUsers
+                                               and not empty configureTools.configuredTools}">
+                                <ui:include src="/sections/admin/project/configMemberAccounts.xhtml"/>
+                            </p:tab>
+                            <p:tab id="configRoles" title="Configure Member Roles"
+                                   rendered="#{not empty configureUsers.selectedUsers}">
+                                <ui:include src="/sections/admin/project/configMembersPanel.xhtml"/>
+                            </p:tab>
+                            <p:tab id="confirm" title="Confirm">
+                                <ui:include src="/sections/admin/project/summary.xhtml"/>
+                            </p:tab>
+                        </p:wizard>
+                    </p:panel>
+
+                    <p:dialog header="Cancel"
+                              widgetVar="confirmCancelDialog"
+                              modal="false">
+                              Are you sure you want to cancel?
+                        <h:panelGrid columns="2">
+                            <p:commandButton value="Yes"
+                                             onclick="confirmCancelDialog.hide();resetProjectWizard();"
+                                             action="#{createProjectBean.resetFields}"
+                                             update="createProjectForm"/>
+                            <p:commandButton value="No" onclick="confirmCancelDialog.hide()"/>
+                        </h:panelGrid>
+                    </p:dialog>
+                    <!-- Buttons -->
+                    <p:outputPanel id="buttonsPanel">
+                        <p:commandButton id="cancelButton"
+                             value="Cancel" style="float:left;vertical-align: bottom"
+                             onclick="confirmCancelDialog.show()" type="reset"
+                             />
+                        <p:commandButton id="saveButton"
+                                         value="Save" style="float:right;vertical-align: bottom"
+                                         process="@this"
+                                         update="projectListContainerForm createProjectDialog"
+                                         onclick="createProjectDialog.hide();resetProjectWizard();"
+                                         actionListener="#{createProjectBean.saveProjectAction}"/>
+                    </p:outputPanel>
+                    <!-- hot keys -->
+                    <p:hotkey bind="left" onsuccess="createProjectWizard.previous()"/>
+                    <p:hotkey bind="right" onsuccess="createProjectWizard.next()"/>
+                </h:form>
+                <p:messages id="validationMessage" showDetail="true"/>
+            </h:panelGrid>
+        </p:panel>
+    </p:dialog>
+</html>

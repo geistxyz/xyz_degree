@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+    <h:panelGrid id="projectInformationPanel" columns="1">
+        <h:panelGrid columns="1">
+            <p:panel header="General Information">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Name (*):" style="float: right"/>
+                    <p:inputText id="projectNameInput"
+                                 value="#{createProjectBean.project.name}"
+                                 required="true"
+                                 requiredMessage="Project name is required."
+                                 title="Project's name">
+                        <p:ajax event="blur" process="@this projectNameInput" update=":validationMessage :growl nameMessage next"
+                                listener="#{createProjectBean.validateName}"/>
+                    </p:inputText>
+                    <h:outputLabel value="Description:" style="float: right"/>
+                    <p:inputTextarea id="projectDescriptionInput"
+                                     autoResize="false"
+                                     effectDuration="0"
+                                     maxHeight="100"
+                                     value="#{createProjectBean.project.description}"/>
+                    <p:spacer/>
+                </h:panelGrid>
+            </p:panel>
+        </h:panelGrid>
+    </h:panelGrid>
+</html>

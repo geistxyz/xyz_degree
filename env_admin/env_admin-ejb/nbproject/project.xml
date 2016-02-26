@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.j2ee.ejbjarproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/j2ee-ejbjarproject/3">
+            <name>env_admin-ejb</name>
+            <minimum-ant-version>1.6.5</minimum-ant-version>
+            <included-library dirs="200">reference.common_interfaces.jar</included-library>
+            <included-library dirs="200">reference.XPlannerPlugin.jar</included-library>
+            <included-library dirs="200">file.reference.axis-ant.jar</included-library>
+            <included-library dirs="200">file.reference.sqljdbc4.jar</included-library>
+            <included-library dirs="200">file.reference.axis-schema.jar</included-library>
+            <included-library dirs="200">file.reference.axis.jar</included-library>
+            <included-library dirs="200">file.reference.commons-discovery-0.2.jar</included-library>
+            <included-library dirs="200">file.reference.commons-logging-1.0.4.jar</included-library>
+            <included-library dirs="200">file.reference.jaxrpc.jar</included-library>
+            <included-library dirs="200">file.reference.wsdl4j-1.5.1.jar</included-library>
+            <included-library dirs="200">reference.TeamTrackPlugin.jar</included-library>
+            <included-library dirs="200">reference.DummyPlugin.jar</included-library>
+            <included-library dirs="200">reference.IssueTrackerDummy.jar</included-library>
+            <included-library dirs="200">reference.SourceCodeMgEngine.jar</included-library>
+            <included-library dirs="200">reference.MercurialPlugin.jar</included-library>
+            <included-library dirs="200">libs.CopyLibs.classpath</included-library>
+            <source-roots>
+                <root id="src.dir"/>
+            </source-roots>
+            <test-roots>
+                <root id="test.src.dir"/>
+            </test-roots>
+        </data>
+        <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">
+            <reference>
+                <foreign-project>DummyPlugin</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>IssueTrackerDummy</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>MercurialPlugin</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>SourceCodeMgEngine</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>TeamTrackPlugin</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>XPlannerPlugin</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>common_interfaces</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+        </references>
+    </configuration>
+</project>

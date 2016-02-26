@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+
+    </head>
+    <body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="dialogContainer">
+                <ui:include src="/sections/busyDialog.xhtml"/>
+                <ui:include src="/sections/admin/user/createUserDialog.xhtml"/>
+                <ui:include src="/sections/admin/user/createNewUserDialog.xhtml"/>
+                <ui:include src="/sections/admin/tool/configureToolDialog.xhtml"/>
+                <ui:include src="/sections/admin/project/createProjectDialog.xhtml"/>
+
+            </ui:define>
+            <ui:define name="windowTitle">
+                Administration
+            </ui:define>
+
+            <ui:define name="heading">
+                <h:outputText value="#{labels.adminTitle}"
+                              style="margin:0;
+                              color: #ffffff;
+                              font: bold 30px 'Calibri', Arial;"/>
+                <h:form>
+                    <h:commandLink style="float: right;
+                                   margin-right: 10px;
+                                   margin-top: -20px;"
+                                   action="#{authentication.logout}"
+                                   value="Log Out"/>
+                </h:form>
+                <h:outputLabel style="float: right;
+                               margin-right: 75px;
+                               margin-top: -20px;
+                               color: #ffffff;"
+                               value="Welcome, Admin!" />
+            </ui:define>
+            <ui:define name="sidebarLeft">
+                <ui:include src="/sections/admin/sidebarLeft.xhtml"/>
+            </ui:define>
+            <ui:define name="content">
+                <p:growl id="growl" showDetail="true"/>
+                <p:ajaxStatus onstart="busyDialog.show()" oncomplete="busyDialog.hide()"/>
+                <p:accordionPanel id="mainAccordionPanel" autoHeight="false" dynamic="true">
+                    <p:tab title="Projects" id="projectsSectionTap">
+
+                        <p:spacer height="15"/>
+
+                        <!-- project list panel -->
+                        <p:panel id="projectsListPanel"
+                                 header="Project List">
+                            <h:form id="projectListContainerForm">
+                                <p:spacer height="30"/>
+                                <p:dataTable var="project" id="projectsTable"
+                                             value="#{projectListBean.projects}"
+                                             selection="#{projectListBean.selectedProject}"
+                                             selectionMode="single"
+                                             paginator="true" rows="10"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport}{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             rowSelectListener="#{projectListBean.onRowSelect}"
+                                             onRowSelectUpdate="growl selectedProjectDetailsPanel"
+                                             rowUnselectListener="#{projectListBean.onRowUnselect}"
+                                             onRowUnselectUpdate="growl selectedProjectDetailsPanel">
+                                    <f:facet name="header">
+                                        <h:outputLabel>List of Projects</h:outputLabel>
+                                    </f:facet>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Name"/>
+                                        </f:facet>
+                                        <h:outputText value="#{project.name}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Description"/>
+                                        </f:facet>
+                                        <h:outputText value="#{project.description}" escape="false"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+                        </p:panel>
+
+                        <p:spacer height="20"/>
+
+                        <!-- project details panel-->
+                        <p:outputPanel id="selectedProjectDetailsPanel">
+                            <p:panel id="projectDetailsPanel" header="Project Details" visible="#{projectListBean.isThereASelectedProject}">
+                                <p:tabView>
+                                    <p:tab title="Overview">
+                                        <h3>#{projectListBean.selectedProject.name}</h3>
+                                        <h:outputLabel>Description: </h:outputLabel>
+                                        <h:outputLabel>#{projectListBean.selectedProject.description}</h:outputLabel>
+                                    </p:tab>
+                                    <p:tab title="Support Tools">
+                                        <h:form id="projectToolsForm">
+                                            <p:toolbar id="toolsTableToolBar">
+                                                <p:toolbarGroup align="left">
+                                                    <p:commandButton value="Add" image="ui-icon-circle-plus"/>
+                                                    <p:divider />
+                                                    <p:commandButton value="Edit" image="ui-icon-wrench"
+                                                                     oncomplete="configureToolDialog.show()"
+                                                                     disabled="#{configureToolBean.selectedTool == null}"/>
+                                                    <p:divider />
+                                                    <p:commandButton type="push" value="Delete" image="ui-icon-circle-minus"/>
+                                                </p:toolbarGroup>
+                                            </p:toolbar>
+                                            <p:dataTable value="#{configureToolBean.tools}"
+                                                         var="toolByProject"
+                                                         id="projectToolsTable"
+                                                         selectionMode="single"
+                                                         rowSelectListener="#{configureToolBean.onRowSelect}"
+                                                         onRowSelectUpdate="growl configureToolDialog toolsTableToolBar"
+                                                         onRowUnselectUpdate="configureToolDialog toolsTableToolBar"
+                                                         rowUnselectListener="#{configureToolBean.onRowUnselect}"
+                                                         selection="#{configureToolBean.selectedTool}">
+                                                <p:column>
+                                                    <f:facet name="header">Name</f:facet>
+                                                    <h:outputText value="#{toolByProject.tool.name}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">Version</f:facet>
+                                                    <h:outputText value="#{toolByProject.tool.version}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">Located at</f:facet>
+                                                    <h:outputText value="#{toolByProject.server}"/>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </h:form>
+                                    </p:tab>
+                                    <p:tab title="Team Members">
+                                        <h:form id="membersTableForm">
+                                            <p:dataTable id="projectMembersTable"
+                                                         value="#{projectListBean.selectedProject.memberAccounts}"
+                                                         var="member">
+                                                <p:column headerText="User Name">
+                                                    <h:outputText value="#{member.userEntity.name}"/>
+                                                </p:column>
+                                                <p:column headerText="Role">
+                                                    <h:outputText value="#{member.rolEntity.name}"/>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </h:form>
+                                    </p:tab>
+                                    <!--
+                                    <p:tab title="Notifications">
+                                        <h:form id="notificationsForm">
+                                            <p:toolbar id="notificationsToolbar">
+                                                <p:toolbarGroup>
+                                                    <p:commandButton id="addNotificationButton"
+                                                                     value="Add"
+                                                                     onclick="configNewNotificationRuleDialog.show()"
+                                                                     image="ui-icon-circle-plus"/>
+                                                </p:toolbarGroup>
+                                            </p:toolbar>
+                                            <p:dataTable id="notificationsTable"
+                                                         selectionMode="single">
+                                                <p:column headerText="Name">
+
+                                                </p:column>
+                                                <p:column headerText="Provider Tool">
+
+                                                </p:column>
+                                                <p:column headerText="Last Time Run">
+
+                                                </p:column>
+                                                <p:column headerText="Schedule">
+
+                                                </p:column>
+                                            </p:dataTable>
+                                        </h:form>
+
+                                    </p:tab>
+                                    -->
+
+                                </p:tabView>
+                            </p:panel>
+
+                            <p:panel id="message" visible="#{not projectListBean.isThereASelectedProject}">
+                                <h:outputLabel value="Select a project above to fill this panel with project details."/>
+                            </p:panel>
+
+                        </p:outputPanel>
+
+                        <p:spacer height="40px"/>
+                    </p:tab>
+                    <p:tab title="Users">
+                        <!-- admin users table -->
+                        <h:form id="usersAdminViewForm">
+                            <p:toolbar id="usersAdminTableToolBar">
+                                <p:toolbarGroup align="left">
+                                    <p:commandButton value="Add" image="ui-icon-plus" onclick="createNewUserDialog.show()"/>
+                                    <p:divider />
+                                    <p:commandButton type="push" value="Delete" image="ui-icon-minus" disabled="true"/>
+                                </p:toolbarGroup>
+                            </p:toolbar>
+                            <p:dataTable id="allUsersTable"
+                                         value="#{createUserBean.allUsers}"
+                                         var="user"
+                                         rows="10"
+                                         paginator="true"
+                                         paginatorAlwaysVisible="false"
+                                         >
+                                <p:column headerText="User Name">
+                                    #{user.name}
+                                </p:column>
+                                <p:column headerText="Login">
+                                    #{user.login}
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+
+                    </p:tab>
+                    <!--                    <p:tab title="Tools">
+
+                                        </p:tab>-->
+                </p:accordionPanel>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

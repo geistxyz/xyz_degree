@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <ui:param name="gridList" value="#{reportsController.gridReports}"/>
+        <c:choose>
+            <c:when test="#{gridList.size() > 0}">
+                <h:form>
+                    <c:forEach var="i" begin="0" end="#{gridList.size()-1}" step="1" varStatus ="status">
+                        <p:panel header="#{gridList[i].reportName}">
+                            <p:dataTable id="reportTemplate#{i}" value="#{gridList[i].data}" var="item">
+                                <p:columns value="#{gridList[i].columns}" var="column" columnIndexVar="colIndex">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{column}" />
+                                    </f:facet>
+                                    <h:outputText value="#{item[colIndex].data}" escape="false"/>
+                                </p:columns>
+                            </p:dataTable>
+                        </p:panel>
+                    </c:forEach>
+                </h:form>
+            </c:when>
+            <c:otherwise>
+                There are no Grid reports to display
+            </c:otherwise>
+        </c:choose>
+    </cc:implementation>
+</html>

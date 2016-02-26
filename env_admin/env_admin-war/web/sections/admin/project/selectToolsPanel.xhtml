@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <p:panel id="selectToolsPanel"
+             header="Select tools to configure"
+             >
+        <p:panel style="margin-left: 10%; display: inline-block;">
+
+            <h:panelGrid columns="3"
+                         title="Select one or more tools to configure"
+                         columnClasses="alignTop, ,alignTop">
+                <p:dataTable id="availableToolsTable"
+                             value="#{configureTools.installedTools}"
+                             selection="#{configureTools.toolsToSelect}"
+                             onRowSelectUpdate="addToolSelectionButton"
+                             onRowUnselectUpdate="addToolSelectionButton"
+                             selectionMode="multiple"
+                             var="tool">
+                    <p:column>
+                        <f:facet name="header">Available Tools</f:facet>
+                        <h:outputText value="#{tool.name}"/>
+                    </p:column>
+                </p:dataTable>
+                <h:panelGrid columns="1"
+                             style="margin: 15px">
+                    <p:commandButton id="addToolSelectionButton"
+                                     title="Add to Selected Tools"
+                                     image="ui-icon-circle-triangle-e"
+                                     process="@this availableToolsTable selectedToolsTable"
+                                     update="removeToolButton :creationSummary availableToolsTable selectedToolsTable createProjectWizard toolConfigurationPanel"
+                                     disabled="#{empty configureTools.toolsToSelect}"
+                                     actionListener="#{configureTools.addTools}"/>
+                    <p:commandButton title="Remove from Selected Tools"
+                                     id="removeToolButton"
+                                     image="ui-icon-circle-triangle-w"
+                                     process="@this availableToolsTable selectedToolsTable"
+                                     update="@this :creationSummary availableToolsTable selectedToolsTable toolConfigurationPanel createProjectWizard toolConfigurationPanel"
+                                     disabled="#{empty configureTools.toolsToRemove}"
+                                     actionListener="#{configureTools.removeTools}"/>
+                </h:panelGrid>
+                <p:dataTable id="selectedToolsTable"
+                             value="#{configureTools.selectedToolsList}"
+                             selection="#{configureTools.toolsToRemove}"
+                             selectionMode="multiple"
+                             var="tool"
+                             onRowSelectUpdate="toolConfigurationPanel removeToolButton"
+                             onRowUnselectUpdate="toolConfigurationPanel removeToolButton">
+                    <p:column>
+                        <f:facet name="header">Selected Tools</f:facet>
+                        <h:outputText value="#{tool.name}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </p:panel>
+    </p:panel>
+</html>

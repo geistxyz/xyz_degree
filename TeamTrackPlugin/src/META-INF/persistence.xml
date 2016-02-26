@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="TeamTrackPluginPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>edu.umss.devportal.plugins.teamtrack.model.TtsProducts</class>
+    <class>edu.umss.devportal.plugins.teamtrack.model.TsProjects</class>
+    <class>edu.umss.devportal.plugins.teamtrack.model.TsUsers</class>
+    <class>edu.umss.devportal.plugins.teamtrack.model.TsLastids</class>
+    <class>edu.umss.devportal.plugins.teamtrack.model.TsMembers</class>
+    <class>edu.umss.devportal.plugins.teamtrack.model.TsGroups</class>
+    <class>edu.umss.devportal.plugins.teamtrack.model.TttIssues</class>
+    <class>edu.umss.devportal.plugins.teamtrack.model.TsFields</class>
+    <class>edu.umss.devportal.plugins.teamtrack.model.TsSelections</class>
+    <class>edu.umss.devportal.plugins.teamtrack.model.TsStates</class>
+<!--    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://ALEX-BCF5EA0DD3:1433;databaseName=teamtrack"/>
+      <property name="javax.persistence.jdbc.password" value=".sa"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.user" value="sa"/>
+    </properties>-->
+  </persistence-unit>
+</persistence>
