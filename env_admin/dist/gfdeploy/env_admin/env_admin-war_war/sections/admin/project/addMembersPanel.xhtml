@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <p:panel id="selectMembersPanel"
+             header="Add/Select Users">
+        <h:panelGrid columns="1">
+            <p:commandButton value="Create new User"
+                             title="Click to create a New User"
+                             image="ui-icon-person"
+                             onclick="createUserDialog.show()"/>
+
+            <p:spacer height="20"/>
+
+            <!-- add members panel-->
+            <p:panel id="addMembersPanel">
+                <h:panelGrid columns="3" columnClasses="alignTop, , alignTop">
+
+                    <!-- available users -->
+                    <p:dataTable id="selectUsersList"
+                                 value="#{configureUsers.availableUsers}"
+                                 selection="#{configureUsers.usersToAdd}"
+                                 onRowSelectUpdate="addMembersButton"
+                                 onRowUnselectUpdate="addMembersButton"
+                                 selectionMode="multiple"
+                                 var="userToAdd"
+                                 rows="10"
+                                 paginator="true"
+                                 widgetVar="selectedUsersList"
+                                 paginatorAlwaysVisible="false"
+                                 >
+                        <f:facet name="header">
+                            Available Users
+                        </f:facet>
+                        <p:column headerText="Name"
+                                  filterBy="#{userToAdd.name}"
+                                  filterMatchMode="contains">
+                            <h:outputText value="#{userToAdd.name}"/>
+                        </p:column>
+                        <p:column headerText="Login name"
+                                  filterBy="#{userToAdd.login}"
+                                  filterMatchMode="contains">
+                            <h:outputText value="#{userToAdd.login}"/>
+                        </p:column>
+                    </p:dataTable>
+
+                    <!-- control buttons panel -->
+                    <h:panelGrid columns="1" style="margin: 10px">
+                        <p:commandButton id="addMembersButton"
+                                         value="Add Member"
+                                         image="ui-icon-circle-plus"
+                                         actionListener="#{configureUsers.addSelectedMembers}"
+                                         disabled="#{empty configureUsers.usersToAdd}"
+                                         process="@this selectUsersList selectedMembersTable"
+                                         update="@this selectUsersList selectedMembersTable createProjectWizard"
+                                         oncomplete="selectedUsersList.clearFilters()"/>
+                    </h:panelGrid>
+
+                    <!-- selected users to ad as project members-->
+                    <p:dataTable id="selectedMembersTable"
+                                 value="#{configureUsers.selectedUsers}"
+                                 var="newMember">
+                        <f:facet name="header">Selected Members</f:facet>
+                        <p:column headerText="User Name">
+                            <h:outputText value="#{newMember.name}"/>
+                        </p:column>
+                        <p:column headerText="Login Name">
+                            <h:outputText value="#{newMember.login}"/>
+                        </p:column>
+                    </p:dataTable>
+
+                </h:panelGrid>
+            </p:panel>
+        </h:panelGrid>
+    </p:panel>
+</html>

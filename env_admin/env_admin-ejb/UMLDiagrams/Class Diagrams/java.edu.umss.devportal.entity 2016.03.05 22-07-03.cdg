@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="java.edu.umss.devportal.entity">
+  <ClassDiagramComponents>
+    <Class name="PrivilegeByRol" package="edu.umss.devportal.entity" visibility="public" xPosition="1206.0" yPosition="77.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="privilegeId" type="int" visibility="private"/>
+        <Field name="rolId" type="int" visibility="private"/>
+        <Field name="privilegeEntity" type="PrivilegeEntity" visibility="private"/>
+        <Field name="rolEntity" type="RolEntity" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getPrivilegeEntity" returnType="PrivilegeEntity" visibility="public"/>
+        <Method name="setPrivilegeEntity" returnType="void" visibility="public">
+          <Argument type="PrivilegeEntity" name="privilegeEntity"/>
+        </Method>
+        <Method name="getPrivilegeId" returnType="int" visibility="public"/>
+        <Method name="setPrivilegeId" returnType="void" visibility="public">
+          <Argument type="int" name="privilegeId"/>
+        </Method>
+        <Method name="getRolEntity" returnType="RolEntity" visibility="public"/>
+        <Method name="setRolEntity" returnType="void" visibility="public">
+          <Argument type="RolEntity" name="rolEntity"/>
+        </Method>
+        <Method name="getRolId" returnType="int" visibility="public"/>
+        <Method name="setRolId" returnType="void" visibility="public">
+          <Argument type="int" name="rolId"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PrivilegeByRolPK" package="edu.umss.devportal.entity" visibility="public" xPosition="3193.0" yPosition="2072.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="privilegeId" type="int" visibility="private"/>
+        <Field name="rolId" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getPrivilegeId" returnType="int" visibility="public"/>
+        <Method name="setPrivilegeId" returnType="void" visibility="public">
+          <Argument type="int" name="privilegeId"/>
+        </Method>
+        <Method name="getRolId" returnType="int" visibility="public"/>
+        <Method name="setRolId" returnType="void" visibility="public">
+          <Argument type="int" name="rolId"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PrivilegeEntity" package="edu.umss.devportal.entity" visibility="public" xPosition="124.0" yPosition="96.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="id" type="int" visibility="private"/>
+        <Field name="page" type="String" visibility="private"/>
+        <Field name="privilegeByRols" type="List&lt;PrivilegeByRol&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="getPage" returnType="String" visibility="public"/>
+        <Method name="setPage" returnType="void" visibility="public">
+          <Argument type="String" name="page"/>
+        </Method>
+        <Method name="getPrivilegeByRols" returnType="List&lt;PrivilegeByRol&gt;" visibility="public"/>
+        <Method name="setPrivilegeByRols" returnType="void" visibility="public">
+          <Argument type="List&lt;PrivilegeByRol&gt;" name="privilegeByRols"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ProjectEntity" package="edu.umss.devportal.entity" visibility="public" xPosition="1268.0" yPosition="1646.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="id" type="int" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="description" type="String" visibility="private"/>
+        <Field name="toolByProjects" type="List&lt;ToolByProject&gt;" visibility="private"/>
+        <Field name="memberAccounts" type="List&lt;ProjectMembershipEntity&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getDescription" returnType="String" visibility="public"/>
+        <Method name="setDescription" returnType="void" visibility="public">
+          <Argument type="String" name="description"/>
+        </Method>
+        <Method name="getToolByProjects" returnType="List&lt;ToolByProject&gt;" visibility="public"/>
+        <Method name="setToolByProjects" returnType="void" visibility="public">
+          <Argument type="List&lt;ToolByProject&gt;" name="toolByProjects"/>
+        </Method>
+        <Method name="associateToolByProject" returnType="void" visibility="private">
+          <Argument type="ToolByProject" name="toolByProject"/>
+        </Method>
+        <Method name="getMemberAccounts" returnType="List&lt;ProjectMembershipEntity&gt;" visibility="public"/>
+        <Method name="setMemberAccounts" returnType="void" visibility="public">
+          <Argument type="List&lt;ProjectMembershipEntity&gt;" name="memberAccounts"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ProjectMembershipEntity" package="edu.umss.devportal.entity" visibility="public" xPosition="1718.0" yPosition="1323.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="userId" type="int" visibility="private"/>
+        <Field name="projectId" type="int" visibility="private"/>
+        <Field name="rolId" type="int" visibility="private"/>
+        <Field name="userEntity" type="UserEntity" visibility="private"/>
+        <Field name="projectEntity" type="ProjectEntity" visibility="private"/>
+        <Field name="rolEntity" type="RolEntity" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getProjectEntity" returnType="ProjectEntity" visibility="public"/>
+        <Method name="setProjectEntity" returnType="void" visibility="public">
+          <Argument type="ProjectEntity" name="projectEntity"/>
+        </Method>
+        <Method name="getProjectId" returnType="int" visibility="public"/>
+        <Method name="setProjectId" returnType="void" visibility="public">
+          <Argument type="int" name="projectId"/>
+        </Method>
+        <Method name="getRolEntity" returnType="RolEntity" visibility="public"/>
+        <Method name="setRolEntity" returnType="void" visibility="public">
+          <Argument type="RolEntity" name="rolEntity"/>
+        </Method>
+        <Method name="getRolId" returnType="int" visibility="public"/>
+        <Method name="setRolId" returnType="void" visibility="public">
+          <Argument type="int" name="rolId"/>
+        </Method>
+        <Method name="getUserEntity" returnType="UserEntity" visibility="public"/>
+        <Method name="setUserEntity" returnType="void" visibility="public">
+          <Argument type="UserEntity" name="userEntity"/>
+        </Method>
+        <Method name="getUserId" returnType="int" visibility="public"/>
+        <Method name="setUserId" returnType="void" visibility="public">
+          <Argument type="int" name="userId"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ProjectMembershipEntityPK" package="edu.umss.devportal.entity" visibility="public" xPosition="3193.0" yPosition="1642.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="userId" type="int" visibility="private"/>
+        <Field name="projectId" type="int" visibility="private"/>
+        <Field name="rolId" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getProjectId" returnType="int" visibility="public"/>
+        <Method name="setProjectId" returnType="void" visibility="public">
+          <Argument type="int" name="projectId"/>
+        </Method>
+        <Method name="getRolId" returnType="int" visibility="public"/>
+        <Method name="setRolId" returnType="void" visibility="public">
+          <Argument type="int" name="rolId"/>
+        </Method>
+        <Method name="getUserId" returnType="int" visibility="public"/>
+        <Method name="setUserId" returnType="void" visibility="public">
+          <Argument type="int" name="userId"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="RolEntity" package="edu.umss.devportal.entity" visibility="public" xPosition="3105.0" yPosition="96.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="id" type="int" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="privilegeByRols" type="List&lt;PrivilegeByRol&gt;" visibility="private"/>
+        <Field name="projectMembershipEntitys" type="List&lt;ProjectMembershipEntity&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getPrivilegeByRols" returnType="List&lt;PrivilegeByRol&gt;" visibility="public"/>
+        <Method name="setPrivilegeByRols" returnType="void" visibility="public">
+          <Argument type="List&lt;PrivilegeByRol&gt;" name="privilegeByRols"/>
+        </Method>
+        <Method name="getProjectMembershipEntitys" returnType="List&lt;ProjectMembershipEntity&gt;" visibility="public"/>
+        <Method name="setProjectMembershipEntitys" returnType="void" visibility="public">
+          <Argument type="List&lt;ProjectMembershipEntity&gt;" name="projectMembershipEntitys"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ToolByProject" package="edu.umss.devportal.entity" visibility="public" xPosition="850.0" yPosition="679.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="toolId" type="int" visibility="private"/>
+        <Field name="projectId" type="int" visibility="private"/>
+        <Field name="project" type="ProjectEntity" visibility="private"/>
+        <Field name="tool" type="ToolEntity" visibility="private"/>
+        <Field name="userAcountTools" type="List&lt;UserAcountTool&gt;" visibility="private"/>
+        <Field name="parameters" type="List&lt;ToolProjectParameter&gt;" visibility="private"/>
+        <Field name="toolProjectId" type="String" visibility="private"/>
+        <Field name="server" type="String" visibility="private"/>
+        <Field name="userName" type="String" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="port" type="String" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="typeConection" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getToolProjectId" returnType="String" visibility="public"/>
+        <Method name="setToolProjectId" returnType="void" visibility="public">
+          <Argument type="String" name="toolProjectId"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="setPassword" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getPort" returnType="String" visibility="public"/>
+        <Method name="setPort" returnType="void" visibility="public">
+          <Argument type="String" name="port"/>
+        </Method>
+        <Method name="getProject" returnType="ProjectEntity" visibility="public"/>
+        <Method name="setProject" returnType="void" visibility="public">
+          <Argument type="ProjectEntity" name="project"/>
+        </Method>
+        <Method name="getProjectId" returnType="int" visibility="public"/>
+        <Method name="setProjectId" returnType="void" visibility="public">
+          <Argument type="int" name="projectId"/>
+        </Method>
+        <Method name="getServer" returnType="String" visibility="public"/>
+        <Method name="setServer" returnType="void" visibility="public">
+          <Argument type="String" name="server"/>
+        </Method>
+        <Method name="getTool" returnType="ToolEntity" visibility="public"/>
+        <Method name="setTool" returnType="void" visibility="public">
+          <Argument type="ToolEntity" name="tool"/>
+        </Method>
+        <Method name="getToolId" returnType="int" visibility="public"/>
+        <Method name="setToolId" returnType="void" visibility="public">
+          <Argument type="int" name="toolId"/>
+        </Method>
+        <Method name="getTypeConection" returnType="String" visibility="public"/>
+        <Method name="setTypeConection" returnType="void" visibility="public">
+          <Argument type="String" name="typeConection"/>
+        </Method>
+        <Method name="getUserAcountTools" returnType="List&lt;UserAcountTool&gt;" visibility="public"/>
+        <Method name="setUserAcountTools" returnType="void" visibility="public">
+          <Argument type="List&lt;UserAcountTool&gt;" name="userAcountTools"/>
+        </Method>
+        <Method name="getUserName" returnType="String" visibility="public"/>
+        <Method name="setUserName" returnType="void" visibility="public">
+          <Argument type="String" name="userName"/>
+        </Method>
+        <Method name="getParameters" returnType="List&lt;ToolProjectParameter&gt;" visibility="public"/>
+        <Method name="setParameters" returnType="void" visibility="public">
+          <Argument type="List&lt;ToolProjectParameter&gt;" name="parameters"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ToolByProjectPK" package="edu.umss.devportal.entity" visibility="public" xPosition="2875.0" yPosition="2072.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="projectId" type="int" visibility="private"/>
+        <Field name="toolId" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getProjectId" returnType="int" visibility="public"/>
+        <Method name="setProjectId" returnType="void" visibility="public">
+          <Argument type="int" name="projectId"/>
+        </Method>
+        <Method name="getToolId" returnType="int" visibility="public"/>
+        <Method name="setToolId" returnType="void" visibility="public">
+          <Argument type="int" name="toolId"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ToolEntity" package="edu.umss.devportal.entity" visibility="public" xPosition="159.0" yPosition="1032.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="id" type="int" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="description" type="String" visibility="private"/>
+        <Field name="version" type="String" visibility="private"/>
+        <Field name="type" type="String" visibility="private"/>
+        <Field name="toolByProjects" type="Set&lt;ToolByProject&gt;" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getToolByProjects" returnType="Set&lt;ToolByProject&gt;" visibility="public"/>
+        <Method name="setToolByProjects" returnType="void" visibility="public">
+          <Argument type="Set&lt;ToolByProject&gt;" name="toolByProjects"/>
+        </Method>
+        <Method name="getDescription" returnType="String" visibility="public"/>
+        <Method name="setDescription" returnType="void" visibility="public">
+          <Argument type="String" name="description"/>
+        </Method>
+        <Method name="getType" returnType="String" visibility="public"/>
+        <Method name="setType" returnType="void" visibility="public">
+          <Argument type="String" name="type"/>
+        </Method>
+        <Method name="getVersion" returnType="String" visibility="public"/>
+        <Method name="setVersion" returnType="void" visibility="public">
+          <Argument type="String" name="version"/>
+        </Method>
+        <Method name="getPlugin" returnType="ToolPlugin" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ToolProjectParameter" package="edu.umss.devportal.entity" visibility="public" xPosition="159.0" yPosition="679.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="id" type="Long" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="assignedValue" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="Long" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getAssignedValue" returnType="String" visibility="public"/>
+        <Method name="setAssignedValue" returnType="void" visibility="public">
+          <Argument type="String" name="assignedValue"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="UserAcountTool" package="edu.umss.devportal.entity" visibility="public" xPosition="1268.0" yPosition="679.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="projectId" type="int" visibility="private"/>
+        <Field name="userId" type="int" visibility="private"/>
+        <Field name="toolId" type="int" visibility="private"/>
+        <Field name="userEntity" type="UserEntity" visibility="private"/>
+        <Field name="toolByProject" type="ToolByProject" visibility="private"/>
+        <Field name="userToolId" type="String" visibility="private"/>
+        <Field name="userName" type="String" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getUserToolId" returnType="String" visibility="public"/>
+        <Method name="setUserToolId" returnType="void" visibility="public">
+          <Argument type="String" name="userToolId"/>
+        </Method>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="setPassword" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getProjectId" returnType="int" visibility="public"/>
+        <Method name="setProjectId" returnType="void" visibility="public">
+          <Argument type="int" name="projectId"/>
+        </Method>
+        <Method name="getToolByProject" returnType="ToolByProject" visibility="public"/>
+        <Method name="setToolByProject" returnType="void" visibility="public">
+          <Argument type="ToolByProject" name="toolByProject"/>
+        </Method>
+        <Method name="getToolId" returnType="int" visibility="public"/>
+        <Method name="setToolId" returnType="void" visibility="public">
+          <Argument type="int" name="toolId"/>
+        </Method>
+        <Method name="getUserEntity" returnType="UserEntity" visibility="public"/>
+        <Method name="setUserEntity" returnType="void" visibility="public">
+          <Argument type="UserEntity" name="userEntity"/>
+        </Method>
+        <Method name="getUserId" returnType="int" visibility="public"/>
+        <Method name="setUserId" returnType="void" visibility="public">
+          <Argument type="int" name="userId"/>
+        </Method>
+        <Method name="getUserName" returnType="String" visibility="public"/>
+        <Method name="setUserName" returnType="void" visibility="public">
+          <Argument type="String" name="userName"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="UserAcountToolPK" package="edu.umss.devportal.entity" visibility="public" xPosition="2875.0" yPosition="1653.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="projectId" type="int" visibility="private"/>
+        <Field name="userId" type="int" visibility="private"/>
+        <Field name="toolId" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getToolId" returnType="int" visibility="public"/>
+        <Method name="setToolId" returnType="void" visibility="public">
+          <Argument type="int" name="toolId"/>
+        </Method>
+        <Method name="getProjectId" returnType="int" visibility="public"/>
+        <Method name="setProjectId" returnType="void" visibility="public">
+          <Argument type="int" name="projectId"/>
+        </Method>
+        <Method name="getUserSystemId" returnType="int" visibility="public"/>
+        <Method name="setUserSystemId" returnType="void" visibility="public">
+          <Argument type="int" name="userId"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="UserEntity" package="edu.umss.devportal.entity" visibility="public" xPosition="1718.0" yPosition="679.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="id" type="int" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="login" type="String" visibility="private"/>
+        <Field name="pasword" type="String" visibility="private"/>
+        <Field name="userAcountTools" type="List&lt;UserAcountTool&gt;" visibility="private"/>
+        <Field name="projectMembershipEntitys" type="List&lt;ProjectMembershipEntity&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getLogin" returnType="String" visibility="public"/>
+        <Method name="setLogin" returnType="void" visibility="public">
+          <Argument type="String" name="login"/>
+        </Method>
+        <Method name="getPasword" returnType="String" visibility="public"/>
+        <Method name="setPasword" returnType="void" visibility="public">
+          <Argument type="String" name="pasword"/>
+        </Method>
+        <Method name="getProjectMembershipEntitys" returnType="List&lt;ProjectMembershipEntity&gt;" visibility="public"/>
+        <Method name="setProjectMembershipEntitys" returnType="void" visibility="public">
+          <Argument type="List&lt;ProjectMembershipEntity&gt;" name="projectMembershipEntitys"/>
+        </Method>
+        <Method name="getUserAcountTools" returnType="List&lt;UserAcountTool&gt;" visibility="public"/>
+        <Method name="setUserAcountTools" returnType="void" visibility="public">
+          <Argument type="List&lt;UserAcountTool&gt;" name="userAcountTools"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="userAcountTools" source="edu.umss.devportal.entity.UserEntity" target="edu.umss.devportal.entity.UserAcountTool" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;UserAcountTool&gt;"/>
+    <HasRelation name="tool" source="edu.umss.devportal.entity.ToolByProject" target="edu.umss.devportal.entity.ToolEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.ProjectMembershipEntity" target="edu.umss.devportal.entity.ProjectEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="toolByProjects" source="edu.umss.devportal.entity.ToolEntity" target="edu.umss.devportal.entity.ToolByProject" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="Set&lt;ToolByProject&gt;"/>
+    <HasRelation name="userAcountTools" source="edu.umss.devportal.entity.ToolByProject" target="edu.umss.devportal.entity.UserAcountTool" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;UserAcountTool&gt;"/>
+    <HasRelation name="rolEntity" source="edu.umss.devportal.entity.PrivilegeByRol" target="edu.umss.devportal.entity.RolEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="toolByProject" source="edu.umss.devportal.entity.UserAcountTool" target="edu.umss.devportal.entity.ToolByProject" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="projectEntity" source="edu.umss.devportal.entity.ProjectMembershipEntity" target="edu.umss.devportal.entity.ProjectEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.ToolEntity" target="edu.umss.devportal.entity.ToolByProject" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.ProjectEntity" target="edu.umss.devportal.entity.ProjectMembershipEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="privilegeEntity" source="edu.umss.devportal.entity.PrivilegeByRol" target="edu.umss.devportal.entity.PrivilegeEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.PrivilegeByRol" target="edu.umss.devportal.entity.RolEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.ToolByProject" target="edu.umss.devportal.entity.ToolEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="toolByProjects" source="edu.umss.devportal.entity.ProjectEntity" target="edu.umss.devportal.entity.ToolByProject" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;ToolByProject&gt;"/>
+    <HasRelation name="projectMembershipEntitys" source="edu.umss.devportal.entity.UserEntity" target="edu.umss.devportal.entity.ProjectMembershipEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;ProjectMembershipEntity&gt;"/>
+    <UseRelation source="edu.umss.devportal.entity.ProjectMembershipEntity" target="edu.umss.devportal.entity.RolEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.UserEntity" target="edu.umss.devportal.entity.ProjectMembershipEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="privilegeByRols" source="edu.umss.devportal.entity.PrivilegeEntity" target="edu.umss.devportal.entity.PrivilegeByRol" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PrivilegeByRol&gt;"/>
+    <UseRelation source="edu.umss.devportal.entity.UserEntity" target="edu.umss.devportal.entity.UserAcountTool" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.ProjectEntity" target="edu.umss.devportal.entity.ToolByProject" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.UserAcountTool" target="edu.umss.devportal.entity.UserEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.PrivilegeByRol" target="edu.umss.devportal.entity.PrivilegeEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="parameters" source="edu.umss.devportal.entity.ToolByProject" target="edu.umss.devportal.entity.ToolProjectParameter" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;ToolProjectParameter&gt;"/>
+    <HasRelation name="rolEntity" source="edu.umss.devportal.entity.ProjectMembershipEntity" target="edu.umss.devportal.entity.RolEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.UserAcountTool" target="edu.umss.devportal.entity.ToolByProject" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.ToolByProject" target="edu.umss.devportal.entity.ProjectEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="project" source="edu.umss.devportal.entity.ToolByProject" target="edu.umss.devportal.entity.ProjectEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="userEntity" source="edu.umss.devportal.entity.UserAcountTool" target="edu.umss.devportal.entity.UserEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="memberAccounts" source="edu.umss.devportal.entity.ProjectEntity" target="edu.umss.devportal.entity.ProjectMembershipEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;ProjectMembershipEntity&gt;"/>
+    <HasRelation name="userEntity" source="edu.umss.devportal.entity.ProjectMembershipEntity" target="edu.umss.devportal.entity.UserEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.ToolByProject" target="edu.umss.devportal.entity.UserAcountTool" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.ProjectMembershipEntity" target="edu.umss.devportal.entity.UserEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.RolEntity" target="edu.umss.devportal.entity.ProjectMembershipEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="privilegeByRols" source="edu.umss.devportal.entity.RolEntity" target="edu.umss.devportal.entity.PrivilegeByRol" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PrivilegeByRol&gt;"/>
+    <HasRelation name="projectMembershipEntitys" source="edu.umss.devportal.entity.RolEntity" target="edu.umss.devportal.entity.ProjectMembershipEntity" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;ProjectMembershipEntity&gt;"/>
+    <UseRelation source="edu.umss.devportal.entity.ToolByProject" target="edu.umss.devportal.entity.ToolProjectParameter" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.PrivilegeEntity" target="edu.umss.devportal.entity.PrivilegeByRol" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.umss.devportal.entity.RolEntity" target="edu.umss.devportal.entity.PrivilegeByRol" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

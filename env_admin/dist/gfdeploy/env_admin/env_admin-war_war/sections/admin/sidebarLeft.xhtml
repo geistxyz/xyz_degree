@@ -1,0 +1,15 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:form>
+        <p:menu style="width: 100%">
+            <p:submenu label="Actions">
+                <p:menuitem value="Help" url="../../help.xhtml?faces-redirect=true" />
+            </p:submenu>
+            <p:submenu label="Project">
+                <p:menuitem value="Create New Project" onclick="createProjectDialog.show()"/>
+            </p:submenu>
+        </p:menu>
+        <p:calendar mode="inline" id="inlineCal"/>
+    </h:form>
+</html>

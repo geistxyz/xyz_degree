@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="useridLabel" default="User Id:" />
+        <cc:attribute name="passwordLabel" default="Password:" />
+        <cc:attribute name="loginButtonLabel" default="Login" />
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        
+    <form method="post" action="j_security_check">
+
+        <h:panelGrid columns="2">
+        <h:outputLabel for="j_username" value="#{cc.attrs.useridLabel}" />
+        <input type="text" name="j_username" id="j_username"/>
+        <h:outputLabel for="j_password" value="#{cc.attrs.passwordLabel}" />
+        <input type="password" name="j_password" id="j_password" />
+        </h:panelGrid>
+        <p>
+        <h:commandButton type ="submit" value="#{cc.attrs.loginButtonLabel}"/>
+        </p>
+    </form>
+    </cc:implementation>
+</html>

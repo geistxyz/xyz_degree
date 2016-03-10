@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <p:spacer height="20"/>
+
+    <p:panel>
+        <h:panelGrid columns="3" columnClasses="alignTop, alignTop, alignTop">
+
+            <p:dataTable id="memberAccountsTable"
+                         value="#{configureUsers.memberConfigurationDetails}"
+                         var="member"
+                         selectionMode="single"
+                         selection="#{configureUsers.accountToConfigure}"
+                         onRowSelectUpdate="configureAccountPanel"
+                         onRowUnselectUpdate="configureAccountPanel"
+                         rowUnselectListener="#{configureUsers.onAccountToConfigureUnselected}"
+                         scrollable="true"
+                         liveScroll="true">
+                <p:column headerText="Name">
+                    #{member.membership.userEntity.name}
+                </p:column>
+            </p:dataTable>
+
+            <p:spacer width="20"/>
+
+            <p:outputPanel id="configureAccountPanel">
+                <p:panel rendered="#{not empty configureUsers.accountToConfigure}">
+                    <h:panelGrid columns="3" columnClasses="alignTop, , alignTop">
+                        <p:dataTable id="selectedToolOwnersTable"
+                                     value="#{configureTools.configuredTools}"
+                                     var="toolAssoc"
+                                     selectionMode="single"
+                                     selection="#{configureUsers.toolAccountProvider}"
+                                     rowSelectListener="#{configureUsers.onAccountProviderSelect}"
+                                     onRowUnselectUpdate="selectAssociatedAccountPanel"
+                                     onRowSelectUpdate="selectAssociatedAccountPanel">
+                            <p:column headerText="Tool Name">
+                                #{toolAssoc.name}
+                            </p:column>
+                        </p:dataTable>
+
+                        <p:spacer width="10"/>
+
+                        <p:outputPanel id="selectAssociatedAccountPanel">
+                            <h:panelGrid columns="1"
+                                         rendered="#{not empty configureUsers.toolAccountProvider}">
+                                <h:outputLabel value="Create new mirror Account on Tool"/>
+                                <h:selectBooleanCheckbox value="#{configureUsers.neededNewAccountOnTool}">
+                                    <p:ajax process="@this" update="selectAssociatedAccountPanel"/>
+                                </h:selectBooleanCheckbox>
+                                <p:spacer width="10"/>
+                                <p:toolbar id="mirrorToolAccountsToolbar"
+                                           rendered="#{not configureUsers.neededNewAccountOnTool}">
+                                    <p:toolbarGroup>
+                                        <p:commandButton value="Select"
+                                                         actionListener="#{configureUsers.selectMirrorAccount}"
+                                                         process="configureAccountPanel"
+                                                         update="configureAccountPanel"/>
+                                        <p:inputText id="memberAccountId" value="#{configureUsers.memberAccountId}"/>
+                                    </p:toolbarGroup>
+                                </p:toolbar>
+                                <p:dataTable id="availableToolAccountsTable"
+                                             rendered="#{not configureUsers.neededNewAccountOnTool}"
+                                             value="#{configureUsers.availableUserAccountsFromCurrentTool}"
+                                             var="userAccount"
+                                             selectionMode="single"
+                                             selection="#{configureUsers.selectedMirrorAccount}">
+                                    <p:column headerText="User Name"
+                                              filterBy="#{userAccount.name}">
+                                        #{userAccount.name}
+                                    </p:column>
+                                    <p:column headerText="Login Name"
+                                              filterBy="#{userAccount.login}">
+                                        #{userAccount.login}
+                                    </p:column>
+                                    <p:column headerText="ID"
+                                              filterBy="#{userAccount.id}">
+                                        #{userAccount.id}
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGrid>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </p:panel>
+            </p:outputPanel>
+        </h:panelGrid>
+
+    </p:panel>
+
+
+</html>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <p:dialog id="configNewNotificationRuleDialog"
+              widgetVar="configNewNotificationRuleDialog"
+              header="Configure New Notification Rule"
+              modal="true"
+              width="650">
+        <h:form id="confNewNotifRuleForm">
+
+            <p:panel header="Details">
+                <h:panelGrid columns="2">
+                    <h:panelGrid columns="1">
+                        <h:outputLabel style="font-weight: bold"
+                                       value="Notification Provider"/>
+                        <p:dataTable id="notificationProvidersTable"
+                                     selectionMode="simple">
+                            <p:column headerText="Provider Name">
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1">
+                        <h:outputLabel style="font-weight: bold"
+                                       value="Notification Rule"/>
+                        <p:dataTable id="notificationRulesTable"
+                                     selectionMode="simple">
+                            <p:column headerText="Provider Name">
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:panel header="Schedule">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Frequency of Rule execution:"/>
+                    <h:selectOneRadio id="ruleFreqChoice">
+                        <f:selectItem itemLabel="Once"/>
+                        <f:selectItem itemLabel="Daily"/>
+                        <f:selectItem itemLabel="Weekly"/>
+                        <f:selectItem itemLabel="Monthly"/>
+                    </h:selectOneRadio>
+                    <h:outputLabel value="Start Date:"/>
+                    <p:calendar />
+                    <h:outputLabel value="Select Time:"/>
+                    <p:inputMask mask="99:99"/>
+                </h:panelGrid>
+            </p:panel>
+            <p:panel header="Action">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Choose an Action"/>
+                    <h:selectOneMenu id="ruleActionChoice">
+                        <f:selectItem itemLabel="Send Mail" itemValue="mail"/>
+                        <f:selectItem itemLabel="Send UI Notification" itemValue="ui_notif"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <p:outputPanel id="recipientsPanel">
+                    <p:panel rendered="true">
+                        <h:outputText value="Select recipients for the notification"/>
+                        <h:panelGrid columns="3" columnClasses="alignTop, , alignTop">
+                            <p:dataTable id="availableRecipientsTable">
+                                <p:column headerText="Name" filterBy="">
+
+                                </p:column>
+                            </p:dataTable>
+
+                            <h:panelGrid columns="1">
+                                <p:commandButton value="Add" image="ui-icon-circle-plus"/>
+                            </h:panelGrid>
+
+                            <p:dataTable id="selectedRecipientsTable">
+                                <p:column headerText="Name">
+
+                                </p:column>
+                                <p:column headerText="e-mail">
+
+                                </p:column>
+                            </p:dataTable>
+
+                        </h:panelGrid>
+                    </p:panel>
+
+                </p:outputPanel>
+            </p:panel>
+        </h:form>
+    </p:dialog>
+</html>
+    <!--                        <p:wizard id="confNewNotifRuleWizard"
+                      widgetVar="notificationWizard">
+                <p:tab title="General Input">
+
+                </p:tab>
+                <p:tab title="Schedule ">
+
+                </p:tab>
+
+            </p:wizard>-->

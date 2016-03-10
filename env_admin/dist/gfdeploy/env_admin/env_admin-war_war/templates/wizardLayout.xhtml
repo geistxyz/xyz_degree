@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="windowTitle"/></title>
+        <h:outputStylesheet name="css/aristo/skin.css"/>
+        <style type="text/css">
+            .alignTop {
+            vertical-align:top;
+            }
+        </style>
+    </h:head>
+
+    <h:body style="font-size: small">
+        <f:view contentType="text/html">
+        <ui:insert name="dialogContainer"/>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="top" height="80">
+                <ui:insert name="heading">
+                    <h2>Create Wizard</h2>
+                </ui:insert>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="bottom" height="50">
+                <h:outputLabel>UMSS - Fundación Jala</h:outputLabel>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="left" width="300"
+                          collapsible="true"
+                          resizable="true">
+                <ui:insert name="sidebarLeft">
+                </ui:insert>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" scrollable="true">
+                <ui:insert name="content"/>
+            </p:layoutUnit>
+        </p:layout>
+        <ui:debug/>
+        </f:view>
+    </h:body>
+</html>

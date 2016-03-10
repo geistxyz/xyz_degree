@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:panel id="configureSelectedToolsPanel" header="Configure Tools" style="margin: 10px">
+        <h:panelGrid columns="3" columnClasses="alignTop,,alignTop">
+            <!-- selected and configured tools lists -->
+            <h:panelGrid columns="1">
+                <!--selected tools table-->
+                <p:dataTable id="toolsToConfigureTable"
+                             value="#{configureTools.selectedToolsList}"
+                             selection="#{configureTools.toolToConfigure}"
+                             selectionMode="single"
+                             var="tool"
+                             onRowSelectUpdate="toolConfigurationPanel removeToolButton"
+                             onRowUnselectUpdate="toolConfigurationPanel removeToolButton"
+                             rowUnselectListener="#{configureTools.unselectedConfigureTool}"
+                             rowSelectListener="#{configureTools.createProjectToolAssociation}">
+                    <f:facet name="header">Tools to configure</f:facet>
+                    <p:column>
+                        <f:facet name="header">Selected Tools</f:facet>
+                        <h:outputText value="#{tool.name}"/>
+                    </p:column>
+                </p:dataTable>
+
+                <p:spacer height="20"/>
+
+                <!-- already configured tools list -->
+                <p:outputPanel id="configuredToolsPanel">
+                    <p:dataTable id="configuredToolsTable"
+                                 value="#{configureTools.configuredTools}"
+                                 var="confTool">
+                        <f:facet name="header">Configured Tools</f:facet>
+                        <p:column>
+                            <f:facet name="header">Name</f:facet>
+                            <h:outputText value="#{confTool.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">At</f:facet>
+                            <h:outputText value="#{confTool.server}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:outputPanel>
+            </h:panelGrid>
+
+            <p:spacer width="20"/>
+
+            <!-- tool configuration panel-->
+            <p:outputPanel id="toolConfigurationPanel">
+                <p:panel id="updatedConfigToolPanel"
+                     rendered="#{not empty configureTools.toolToConfigure}"
+                     header="Configuring connection to #{configureTools.toolToConfigure.name}"
+                     widgetVar="toolConfigurationPanel"
+                     >
+                    <h:panelGrid columns="3"  columnClasses="alignTop, alignTop, alignTop">
+                        <p:panel>
+                            <h:panelGrid columns="1">
+                                <h:dataTable id="toolConfigurationFields"
+                                             value="#{configureTools.toolParameters}" var="row">
+                                    <h:column>
+                                        <h:outputText value="#{row.name} :"/>
+                                    </h:column>
+                                    <h:column>
+                                        <h:inputText value="#{row.defaultValue}"/>
+                                    </h:column>
+                                </h:dataTable>
+
+                                <f:facet name="footer">
+                                    <p:commandButton id="resetConfigForm"
+                                                     value="Reset"
+                                                     style="float:left;vertical-align: bottom"
+                                                     type="reset"
+                                                     onclick="configureToolDialog.hide()"
+                                                     />
+                                    <p:spacer width="20"/>
+
+                                    <p:commandButton id="testConnectionLink"
+                                                     value="Test Connection"
+                                                     process="toolConfigurationPanel"
+                                                     actionListener="#{connectionTester.testConnection}"
+                                                     update="growl :testConnectionDialog :validationMessage mirrorToolProjectConfigPanel saveConfigButton"/>
+                                    <p:spacer width="20"/>
+
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:panel>
+
+
+                        <p:outputPanel id="mirrorToolProjectConfigPanel">
+                            <p:panel id="createMirrorPanel"
+                                     rendered="#{not empty configureTools.toolToConfigure and connectionTester.testSuccess}">
+                                <h:panelGrid columns="1">
+<!--                                    <h:outputLabel value="Create New Project inside the Tool: "/>
+                                    <h:selectBooleanCheckbox value="#{configureTools.createMirror}">
+                                        <p:ajax event="mouseup" update="selectAssociatedProjectOutput"
+                                                listener="#{configureTools.toogleCreateMirror}"/>
+                                    </h:selectBooleanCheckbox>-->
+
+                                     <!-- output panel, updates when create mirror check box is changed -->
+                                    <p:outputPanel id="selectAssociatedProjectOutput">
+                                        <p:panel id="selectAssociatedProject"
+                                                 rendered="true">
+                                                 <!-- rendered="#{not configureTools.createMirror and connectionTester.testSuccess}"> -->
+                                            <p:dataTable value="#{configureTools.selectedToolProjects}"
+                                                         var="toolProject"
+                                                         selectionMode="single"
+                                                         selection="#{configureTools.selectedProject}"
+                                                         rows="10"
+                                                         paginator="true"
+                                                         paginatorAlwaysVisible="false">
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        Name
+                                                    </f:facet>
+                                                    <h:outputText value="#{toolProject.name}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        ID
+                                                    </f:facet>
+                                                    <h:inputText value="#{toolProject.id}"/>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </p:panel>
+                                    </p:outputPanel>
+
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:outputPanel>
+                        <f:facet name="footer">
+                            <p:commandButton id="saveConfigButton"
+                                             style="float: left"
+                                             disabled="#{not connectionTester.testSuccess}"
+                                             value="Save Configuration"
+                                             process="configureSelectedToolsPanel"
+                                             update="growl configureSelectedToolsPanel mirrorToolProjectConfigPanel buttonsPanel"
+                                             actionListener="#{configureTools.saveProjectToolAssociationConfiguration}"/>
+                        </f:facet>
+                    </h:panelGrid>
+                </p:panel>
+            </p:outputPanel>
+        </h:panelGrid>
+    </p:panel>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <head>
+        <h:outputStylesheet name="css/login-box.css"/>
+    </head>
+    <body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="windowTitle">
+                Login
+            </ui:define>
+            <ui:define name="sidebarLeft">
+                <h:form>
+                    <p:menu style="width: 100%">
+                        <p:submenu label="Actions">
+                            <p:menuitem value="Help" url="help.xhtml?faces-redirect=true" />
+                        </p:submenu>
+                    </p:menu>
+                    <p:calendar mode="inline" id="inlineCal"/>
+                </h:form>
+            </ui:define>
+            <ui:define name="content">
+                <div style="padding: 100px 0 0 250px;">
+                    <center><div id="login-box"
+                                 style="background: url(resources/images/login-box-backg.png) no-repeat center top;
+                                 width:333px;
+                                 height: 352px;
+                                 padding: 58px 76px 0 76px;
+                                 color: #ffffff;
+                                 font: 12px Arial, Helvetica, sans-serif;">
+                            <H2>#{msgs.loginLabel}</H2>
+                            <br />
+                            #{msgs.loginMessage}
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <h:form>
+                                <h:panelGrid columns="2">
+                                    <h:outputText value="#{msgs.userLabel}"/>
+                                    <p:inputText value="#{authentication.loginName}"
+                                                 id="j_username"
+                                                 required="true"
+                                                 requiredMessage="#{msgs.loginNameCouldNotBeEmptyMessage}"
+                                                 styleClass="form-login"/>
+
+                                    <h:outputText value="#{msgs.passwordLabel}"/>
+                                    <p:password value="#{authentication.password}"
+                                                id="j_password"
+                                                feedback="false"
+                                                minLength="5"
+                                                required="true"
+                                                requiredMessage="#{msgs.passwordCouldNotBeEmptyMessage}"
+                                                styleClass="form-login"/>
+                                    <f:facet name="footer">
+                                        <br />
+                                        <p:commandButton value="#{msgs.loginLabel}"
+                                                         process="@form"
+                                                         update="growl message"
+                                                         action="#{authentication.login}"
+                                                         style="float: right"/>
+                                    </f:facet>
+                                </h:panelGrid>
+                            </h:form>
+                        </div>
+                    </center>
+                    <p:messages id="message" showDetail="true"/>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

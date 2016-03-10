@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <p:dialog widgetVar="createUserDialog" modal="true"
+              id="createUserForProjectDialog"
+              header="Creating new User"
+              width="600">
+        <h:form id="createUserDialogForm">
+
+            <!-- create new member panel-->
+            <p:panel id="createNewUserPanel" visible="true">
+                <h:panelGrid columns="2">
+                    <h:outputText value="User Name:* "/>
+                    <p:inputText value="#{createUserBean.newUser.name}"
+                                 required="true"/>
+                    <h:outputText value="Login name:* "/>
+                    <p:inputText value="#{createUserBean.newUser.login}"
+                                 required="true"/>
+                    <h:outputText value="Password:* "/>
+                    <p:password value="#{createUserBean.newUser.pasword}"
+                                feedback="true"
+                                required="true"
+                                minLength="5"
+                                inline="true"
+                                />
+                    <h:outputText value="Confirm Password:* "/>
+                    <p:password value="#{createUserBean.confirmPassword}"
+                                feedback="false"
+                                required="true"
+                                minLength="5"
+                                />
+                    <f:facet name="footer">
+                        <p:commandButton value="Reset Form"
+                                         style="float: left"
+                                         type="reset"/>
+                        <p:commandButton id="saveUserButton"
+                                         value="Save User"
+                                         style="float: right"
+                                         process="createNewUserPanel"
+                                         update=":growl createProjectForm"
+                                         oncomplete="createUserDialog.hide()"
+                                         actionListener="#{createUserBean.saveUser}"
+                                         />
+                    </f:facet>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </p:dialog>
+</html>

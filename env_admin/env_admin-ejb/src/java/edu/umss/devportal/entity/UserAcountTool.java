@@ -34,9 +34,8 @@ public class UserAcountTool implements Serializable{
 	private UserEntity userEntity;
 	
 	@ManyToOne
-	//@PrimaryKeyJoinColumns(value = { @PrimaryKeyJoinColumn })
-	@PrimaryKeyJoinColumn(name = "TOOL_ID")
-        private ToolByProject toolByProject;
+	@PrimaryKeyJoinColumns(value = { @PrimaryKeyJoinColumn })
+	private ToolByProject toolByProject;
 
 
     private String userToolId;

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <p:panel header="Configure Member accounts and roles">
+        <h:panelGrid columns="3" columnClasses="alignTop, alignTop, alignTop">
+
+            <!-- list of already added project members-->
+            <p:outputPanel id="memberConfigurationPanel">
+                <p:dataTable id="addedMembersTable"
+                             value="#{configureUsers.memberConfigurationDetails}"
+                             rendered="#{not empty configureUsers.selectedUsers}"
+                             var="memberConfig"
+                             rows="10"
+                             paginator="true"
+                             paginatorAlwaysVisible="false"
+                             update="memberConfigurationPanel">
+                    <f:facet name="header">Members configuration table</f:facet>
+
+                    <p:column headerText="User Name">
+                        <h:outputText value="#{memberConfig.membership.userEntity.name}"/>
+                    </p:column>
+                    <p:column headerText="Login Name">
+                        <h:outputText value="#{memberConfig.membership.userEntity.login}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Assigned Roles" title="Click on cell to edit value"/>
+                        </f:facet>
+                        <p:inplace label="#{memberConfig.assignedRoleName}" editor="true">
+                            <h:selectOneListbox value="#{memberConfig.assignedRoleName}">
+                                <f:selectItems value="#{configureUsers.getAvailableRolesLabels()}"
+                                               var="role"
+                                               itemLabel="#{role}"
+                                               itemValue="#{role}"/>
+                            </h:selectOneListbox>
+                        </p:inplace>
+                    </p:column>
+                </p:dataTable>
+            </p:outputPanel>
+        </h:panelGrid>
+    </p:panel>
+</html>

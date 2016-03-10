@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:reports="http://java.sun.com/jsf/composite/reports"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <head><title>Project Administration</title></head>
+    <body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            #{reportsController.postConstruct}
+            <ui:define name="windowTitle">
+                Project Administration
+            </ui:define>
+            <ui:define name="heading">
+                <h:outputText value="#{reportsController.projectName}"
+                              style="margin:0;
+                              color: #ffffff;
+                              font: bold 30px 'Calibri', Arial;"/>
+                <h:form>
+                    <h:commandLink style="float: right;
+                                   margin-right: 10px;
+                                   margin-top: -20px;"
+                                   action="#{authentication.logout}"
+                                   value="Log Out"/>
+                </h:form>
+                <h:outputLabel style="float: right;
+                               margin-right: 75px;
+                               margin-top: -20px;
+                               color: #ffffff;"
+                               value="Welcome, #{reportsController.loggedUserName}!" />
+
+            </ui:define>
+
+            <ui:define name="sidebarLeft">
+                <h:form>
+                    <p:menu style="width: 100%">
+                        <p:submenu label="Actions">
+                            <p:menuitem value="Help" url="../help.xhtml?faces-redirect=true" />
+                            <p:menuitem value="Update reports" url="home.xhtml?faces-redirect=true" />
+                            <p:menuitem value="Back to project list" url="start.xhtml?faces-redirect=true"/>
+                        </p:submenu>
+                    </p:menu>
+                    <p:calendar mode="inline" id="inlineCal"/>
+                </h:form>
+            </ui:define>
+            <ui:define name="content">
+                <b/>
+<!--                <p:growl id="growl" showDetail="true" sticky="false"/>-->
+
+                <p:ajaxStatus onstart="busyDialog.show()" oncomplete="busyDialog.hide()"/>
+                <p:accordionPanel id="chartPanel" autoHeight="600">
+                    <p:tooltip global="true"/>
+                    <p:tab title="Grid Reports" rendered="true">
+                        <reports:gridReportTemplate></reports:gridReportTemplate>
+                    </p:tab>
+                    <p:tab title="Chart Reports" rendered="true">
+                        <reports:chartReportTemplate/>
+                    </p:tab>
+                    <p:tab title="Custom Reports" rendered="true">
+                        <c:choose>
+                            <c:when test="#{reportsController.issueTrackerConfigured}">
+                                <reports:customReportTemplate></reports:customReportTemplate>
+                            </c:when>
+                            <c:otherwise>
+                                There are no custom reports to display
+                            </c:otherwise>
+                        </c:choose>
+                    </p:tab>
+                </p:accordionPanel>
+                <p:panel rendered="true">
+                    <p:messages id="msgs" showDetail="true"/>
+                </p:panel>
+                <ui:include src="/sections/busyDialog.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
